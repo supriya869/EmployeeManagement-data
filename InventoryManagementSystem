@@ -1,0 +1,124 @@
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
+
+class Product {
+    private String name;
+    private int stock;
+
+    public Product(String name, int stock) {
+        this.name = name;
+        this.stock = stock;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getStock() {
+        return stock;
+    }
+
+    public void setStock(int stock) {
+        this.stock = stock;
+    }
+}
+
+public class InventoryManagementSystem {
+    private static Map<String, Product> inventory = new HashMap<>();
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        boolean exit = false;
+
+        while (!exit) {
+            System.out.println("1. Add product");
+            System.out.println("2. Update product");
+            System.out.println("3. Remove product");
+            System.out.println("4. Check stock");
+            System.out.println("5. Exit");
+            System.out.print("Enter your choice: ");
+            int choice = scanner.nextInt();
+            scanner.nextLine(); // Consume newline character
+
+            switch (choice) {
+                case 1:
+                    addProduct(scanner);
+                    break;
+                case 2:
+                    updateProduct(scanner);
+                    break;
+                case 3:
+                    removeProduct(scanner);
+                    break;
+                case 4:
+                    checkStock(scanner);
+                    break;
+                case 5:
+                    exit = true;
+                    break;
+                default:
+                    System.out.println("Invalid choice. Please try again.");
+            }
+            System.out.println();
+        }
+        scanner.close();
+    }
+
+    private static void addProduct(Scanner scanner) {
+        System.out.print("Enter product name: ");
+        String name = scanner.nextLine();
+        System.out.print("Enter stock quantity: ");
+        int stock = scanner.nextInt();
+        scanner.nextLine(); // Consume newline character
+
+        if (inventory.containsKey(name)) {
+            System.out.println("Product already exists. Updating stock quantity.");
+            Product product = inventory.get(name);
+            product.setStock(product.getStock() + stock);
+        } else {
+            inventory.put(name, new Product(name, stock));
+            System.out.println("Product added successfully.");
+        }
+    }
+
+    private static void updateProduct(Scanner scanner) {
+        System.out.print("Enter product name: ");
+        String name = scanner.nextLine();
+
+        if (inventory.containsKey(name)) {
+            Product product = inventory.get(name);
+            System.out.print("Enter new stock quantity: ");
+            int stock = scanner.nextInt();
+            scanner.nextLine(); // Consume newline character
+            product.setStock(stock);
+            System.out.println("Product updated successfully.");
+        } else {
+            System.out.println("Product not found.");
+        }
+    }
+
+    private static void removeProduct(Scanner scanner) {
+        System.out.print("Enter product name: ");
+        String name = scanner.nextLine();
+
+        if (inventory.containsKey(name)) {
+            inventory.remove(name);
+            System.out.println("Product removed successfully.");
+        } else {
+            System.out.println("Product not found.");
+        }
+    }
+
+    private static void checkStock(Scanner scanner) {
+        System.out.print("Enter product name: ");
+        String name = scanner.nextLine();
+
+        if (inventory.containsKey(name)) {
+            Product product = inventory.get(name);
+            System.out.println("Stock quantity: " + product.getStock());
+        } else {
+            System.out.println("Product not found.");
+        }
+    }
+}
