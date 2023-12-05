@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Form</title>
+    <script>
+        function showInsertMessage() {
+            alert("Product data inserted successfully!");
+        }
+
+        function displayAllData() {
+            // Replace 'YOUR_SERVLET_URL' with the actual URL of your servlet
+            window.location.href = 'ProductServlet';
+        }
+
+        function displayProductDetails() {
+            // Implement the logic to display specific product details
+            alert("Implement logic to display product details");
+        }
+
+        function displayAllInsertedData() {
+            // Implement the logic to display all inserted data
+            alert("Implement logic to display all inserted data");
+        }
+    </script>
+</head>
+<body>
+    <h1>Product Form</h1>
+
+    <form action="ProductServlet" method="post" onsubmit="showInsertMessage()">
+        <label for="product_id">Product ID:</label>
+        <input type="text" id="product_id" name="product_id" required><br>
+
+        <label for="product_name">Product Name:</label>
+        <input type="text" id="product_name" name="product_name" required><br>
+
+        <label for="product_cost">Product Cost:</label>
+        <input type="text" id="product_cost" name="product_cost" required><br>
+
+        <label for="made_in">Made In:</label>
+        <input type="text" id="made_in" name="made_in" required><br>
+
+        <label for="company">Company:</label>
+        <input type="text" id="company" name="company" required><br>
+
+        <input type="submit" value="Submit">
+    </form>
+
+    <button onclick="displayAllData()">Display All Data</button>
+    <button onclick="displayProductDetails()">Display Product Details</button>
+    <button onclick="displayAllInsertedData()">Display All Inserted Data</button>
+
+    <!-- Add a link to the ProductServlet -->
+    <p><a href="ProductServlet">Go to ProductServlet</a></p>
+</body>
+</html>
